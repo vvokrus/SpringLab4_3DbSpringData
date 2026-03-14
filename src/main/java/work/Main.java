@@ -49,6 +49,11 @@ public class Main {
             out.println("Find by name = дор");
             Iterable<Teacher> teacherOptional1Name = teacherDao.findByName("дор");
             teacherOptional1Name.forEach(out::println);
+//           FindByName = 'дор'
+
+            out.println("Find by name = дор");
+            Iterable<Teacher> teacherOptional1Name2 = teacherDao.findByName("дор");
+            teacherOptional1Name.forEach(out::println);
         }
     }
 }

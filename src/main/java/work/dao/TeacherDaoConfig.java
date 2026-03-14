@@ -3,6 +3,9 @@ package work.dao;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +25,7 @@ import javax.sql.DataSource;
 @ComponentScan("work.dao")
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "work.dao")
+@EnableCaching
 public class TeacherDaoConfig {
     @Bean
     public DataSource webDataSource(
@@ -58,5 +62,10 @@ public class TeacherDaoConfig {
     @Bean
     public PersistenceExceptionTranslationPostProcessor exceptionTranslationPostProcessor() {
         return new PersistenceExceptionTranslationPostProcessor();
+    }
+
+    @Bean
+    CacheManager cacheManager() {
+        return new ConcurrentMapCacheManager("teachersCache");
     }
 }
